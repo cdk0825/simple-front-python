@@ -19,6 +19,12 @@
 
     <!-- POST 결과 출력 -->
     <pre id="result"></pre>
+    <!-- 게시글 상세 영역 -->
+    <div id="postCard" class="post-card" style="display: none;">
+        <div class="post-id">글 번호: <span id="postId"></span></div>
+        <h3 class="post-title" id="postTitle"></h3>
+        <p class="post-body" id="postBody"></p>
+    </div>
 
     <hr />
 
@@ -30,7 +36,7 @@
 
     <!-- 그냥 이미지 (기능 없음) -->
     <img
-        src="https://blog.kakaocdn.net/dna/O4N5I/btqveI3WCI2/AAAAAAAAAAAAAAAAAAAAAAWqRzC1_8geLqzL1ZgSxKGaIM2qFoGoPHZ6qnOytJc5/img.jpg" />
+        src="https://mblogthumb-phinf.pstatic.net/MjAxODA2MTFfMjA5/MDAxNTI4Njk0OTA1ODI0.3tfI6i9dsz7EropfoMdFYhI6JOuwQxfGIuiipOgbVNQg.kosqNdQXgz-nNK6vtuZ2Mhri9k9JWu8agLEIggPq4esg.JPEG.mumurat/%EA%B1%B8%EC%96%B4%EC%9A%94.jpg?type=w800" />
 
     <script>
         // 결과를 화면에 보여줄 영역
@@ -60,6 +66,35 @@
             const response = await fetch("http://localhost:5000/hello");
             const text = await response.text();
             helloResult.textContent = text;
+        });
+    </script>
+
+    <script>
+        const postCard = document.getElementById("postCard");
+        const postId = document.getElementById("postId");
+        const postTitle = document.getElementById("postTitle");
+        const postBody = document.getElementById("postBody");
+
+        document.getElementById("sendBtn").addEventListener("click", async () => {
+            const title = document.getElementById("title").value;
+            const body = document.getElementById("body").value;
+
+            const response = await fetch("http://localhost:5000/posts", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ title, body })
+            });
+
+            const data = await response.json();
+
+            // 게시글 상세 페이지처럼 표시
+            postId.textContent = data.id;
+            postTitle.textContent = data.title;
+            postBody.textContent = data.body;
+
+            postCard.style.display = "block";
         });
     </script>
 </body>
