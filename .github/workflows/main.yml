@@ -21,9 +21,10 @@ jobs:
       # 3️⃣ 의존성 설치
       - name: 피카츄-테스트에 필요한 라이브러리 설치
         run: |
-          pip install pytest
-          pip install requests
-          pip install jsonschema
+          # pip install pytest
+          # pip install requests
+          # pip install jsonschema
+          pip install -r requirements.txt
 
       # 4️⃣ pytest 실행
       - name: 피카츄-파이테스트 실행
