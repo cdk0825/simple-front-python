@@ -1,4 +1,4 @@
-name: Run pytest on push
+name: repo에 푸시할 때 마다 할 워크플로
 
 on:
   push:   # ✅ 브랜치 상관없이 모든 push에 반응
@@ -23,7 +23,7 @@ jobs:
         run: |
           pip install pytest
           pip install requests
-
+          pip install jsonschema
 
       # 4️⃣ pytest 실행
       - name: Run pytest
