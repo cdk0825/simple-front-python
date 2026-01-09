@@ -87,7 +87,7 @@
                 body: JSON.stringify({ title, body })
             });
 
-            const data = await response.json();
+            const data = await response.json(); 
 
             // 게시글 상세 페이지처럼 표시
             postId.textContent = data.id;
